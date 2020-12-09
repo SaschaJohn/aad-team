@@ -3,7 +3,7 @@ const appInsights = require("applicationinsights");
 
 const pick = async (req, res) => {
     var Player1Name = req.body.Player1Name;
-    var TurnNumber = req.body.TurnNumber;
+    //var TurnNumber = req.body.TurnNumber;
     var matchId = req.body.MatchId;
     if (Player1Name == undefined || matchId == undefined) {
         res.status(400);
@@ -14,7 +14,7 @@ const pick = async (req, res) => {
     // implement arcade intelligence here
     const strategyOption = process.env.PICK_STRATEGY || "RANDOM";
     const result = pickFromStrategy(strategyOption);
-    console.log('Against '+Player1Name+', strategy ' + strategyOption + '  played ' + result.text);
+    console.log('Against '+Player1Name+', strategy ' + strategyOption + '  played ' + result.text + 'TurnNumber' + req.body);
     
     const applicationInsightsIK = process.env.APPINSIGHTS_INSTRUMENTATIONKEY;
     if (applicationInsightsIK) {
@@ -28,7 +28,7 @@ const pick = async (req, res) => {
         }
     }
     //1 Paper , 2 scissor
-    if (Player1Name == 'Courtney' || Player1Name == 'Libby') {
+    if (false && Player1Name == 'Courtney' || Player1Name == 'Libby') {
 
         if (TurnNumber == 0) {
             res.send({ "Move": "Paper", "Bet": 1 });
